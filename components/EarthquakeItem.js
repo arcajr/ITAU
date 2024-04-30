@@ -1,49 +1,39 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import moment from 'moment';
+import { View, Text, StyleSheet } from 'react-native';
 
 const EarthquakeItem = ({ earthquake, onPress }) => {
+  const { properties } = earthquake;
+
   return (
-    <TouchableOpacity style={styles.container} onPress={onPress}>
-      <View style={styles.row}>
-        <Text style={styles.label}>Fecha:</Text>
-        <Text style={styles.value}>
-          {moment(earthquake.properties.time).format('YYYY-MM-DD HH:mm:ss')}
-        </Text>
-      </View>
-      <View style={styles.row}>
-        <Text style={styles.label}>Magnitud:</Text>
-        <Text style={styles.value}>{earthquake.properties.mag}</Text>
-      </View>
-      <View style={styles.row}>
-        <Text style={styles.label}>Ubicación:</Text>
-        <Text style={styles.value}>{earthquake.properties.place}</Text>
-      </View>
-      <View style={styles.row}>
-        <Text style={styles.label}>Profundidad:</Text>
-        <Text style={styles.value}>{earthquake.properties.depth} km</Text>
-      </View>
-    </TouchableOpacity>
+    <View style={styles.container} onPress={onPress}>
+      <Text style={styles.title}>{properties.title}</Text>
+      <Text style={styles.magnitude}>{properties.mag}</Text>
+      <Text style={styles.date}>{new Date(properties.time).toLocaleDateString()}</Text>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    padding: 10,
-    borderBottomWidth: 1,
-    borderBottomColor: '#ccc',
-  },
-  row: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginBottom: 5,
+    alignItems: 'center',
+    paddingHorizontal: 10,
+    paddingVertical: 5,
+    borderBottomWidth: 1,
+    borderBottomColor: 'gray',
   },
-  label: {
-    width: 100,
+  title: {
+    fontSize: 18,
     fontWeight: 'bold',
   },
-  value: {
-    flex: 1,
+  magnitude: {
+    fontSize: 14,
+    color: 'gray',
+  },
+  date: {
+    fontSize: 12,
+    color: 'gray',
   },
 });
 

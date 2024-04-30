@@ -1,37 +1,24 @@
-import React, { useState } from 'react';
-import { FlatList, ActivityIndicator, Text } from 'react-native';
-import EarthquakeItem from './EarthquakeItem';
+import React from 'react';
+import { SectionList, StyleSheet, View } from 'react-native';
 
-const EarthquakeList = ({ earthquakes, onLoadMore }) => {
-  const [loading, setLoading] = useState(false);
-
-  const handleLoadMore = () => {
-    setLoading(true);
-    onLoadMore();
-  };
-
-  const renderFooter = () => {
-    if (loading) {
-      return <ActivityIndicator />;
-    }
-
-    return null;
-  };
-
-  const renderItem = ({ item }) => {
-    return <EarthquakeItem earthquake={item} onPress={() => console.log(item)} />;
-  };
-
+const EarthquakeSectionList = ({ sections, keyExtractor, renderItem, refreshControl }) => {
   return (
-    <FlatList
-      data={earthquakes}
+    <SectionList
+      sections={sections}
+      keyExtractor={keyExtractor}
       renderItem={renderItem}
-      keyExtractor={(item) => item.properties.code}
-      ListFooterComponent={renderFooter}
-      onEndReached={handleLoadMore}
-      onEndReachedThreshold={0.5}
+      ListHeaderComponent={() => <View style={styles.listHeader} />}
+      refreshControl={refreshControl}
+      stickySectionHeadersEnabled
     />
   );
 };
 
-export default EarthquakeList;
+const styles = StyleSheet.create({
+  listHeader: {
+    height: 20,
+    paddingHorizontal: 10
+  },
+});
+
+export default EarthquakeSectionList;
