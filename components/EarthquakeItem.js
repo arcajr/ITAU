@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
-const EarthquakeItem = ({ earthquake, onPress }) => {
+const EarthquakeItems = ({ earthquake, onPress }) => {
   const { properties } = earthquake;
 
   return (

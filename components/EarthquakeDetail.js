@@ -34,16 +34,16 @@ const EarthquakeDetail = ({ route, navigation }) => {
           <MapView
             style={styles.map}
             region={{
-              latitude: earthquake.geometry.coordinates[0], // Corrige el orden de las coordenadas
-              longitude: earthquake.geometry.coordinates[1], // Corrige el orden de las coordenadas
+              latitude: earthquake.geometry.coordinates[0], 
+              longitude: earthquake.geometry.coordinates[1], 
               latitudeDelta: 0.01,
               longitudeDelta: 0.01,
             }}
           >
             <Marker
               coordinate={{
-                latitude: earthquake.geometry.coordinates[0], // Corrige el orden de las coordenadas
-                longitude: earthquake.geometry.coordinates[1], // Corrige el orden de las coordenadas
+                latitude: earthquake.geometry.coordinates[0], 
+                longitude: earthquake.geometry.coordinates[1],
               }}
             />
           </MapView>

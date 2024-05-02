@@ -13,7 +13,6 @@ import MapView, { Marker } from 'react-native-maps';
 import moment from 'moment';
 import EarthquakeService from '../services/EarthquakeService';
 import { LATITUDE_DELTA, LONGITUDE_DELTA } from '../utils/constants';
-import EarthquakeItem from '../components/EarthquakeItem';
 
 const EarthquakeScreen = ({ navigation }) => {
   const [earthquakes, setEarthquakes] = useState([]);
@@ -24,8 +23,8 @@ const EarthquakeScreen = ({ navigation }) => {
     longitudeDelta: LONGITUDE_DELTA,
   });
   const [filteredEarthquakes, setFilteredEarthquakes] = useState([]);
-  const [startDate, setStartDate] = useState(moment().subtract(7, 'days'));
-  const [endDate, setEndDate] = useState(moment());
+  const [startDate, setStartDate] = useState(moment('2024-01-22'));
+  const [endDate, setEndDate] = useState(moment('2024-02-02'));
   const [page, setPage] = useState(1);
   const limit = 20;
 
@@ -46,7 +45,6 @@ const EarthquakeScreen = ({ navigation }) => {
       });
     } catch (error) {
       console.error(error);
-      // Handle error
     }
   };
 
@@ -89,23 +87,23 @@ const EarthquakeScreen = ({ navigation }) => {
 
   return (
     <SafeAreaView style={styles.container}>
-    <View style={styles.filterContainer}>
+      <View style={styles.filterContainer}>
         <View style={styles.filterRow}>
-          <Text style={styles.filterLabel}>FechaInicio:</Text>
+          <Text style={styles.filterLabel}>Fecha Inicio:</Text>
           <TextInput
             style={styles.filterInput}
-            placeholder="YYYY-MM-DD"
-            value={startDate.format('YYYY-MM-DD')}
-            onChangeText={(text) => setStartDate(moment(text, 'YYYY-MM-DD'))}
+            placeholder="DD-MM-YYYY"
+            value={startDate.format('DD-MM-YYYY')}
+            onChangeText={(text) => setStartDate(moment(text, 'DD-MM-YYYY'))}
           />
         </View>
         <View style={styles.filterRow}>
           <Text style={styles.filterLabel}>Fecha Termino:</Text>
           <TextInput
             style={styles.filterInput}
-            placeholder="YYYY-MM-DD"
-            value={endDate.format('YYYY-MM-DD')}
-            onChangeText={(text) => setEndDate(moment(text, 'YYYY-MM-DD'))}
+            placeholder="DD-MM-YYYY"
+            value={endDate.format('DD-MM-YYYY')}
+            onChangeText={(text) => setEndDate(moment(text, 'DD-MM-YYYY'))}
           />
         </View>
         <TouchableOpacity style={styles.filterButton} onPress={handleFilterPress}>
@@ -198,13 +196,13 @@ const styles = StyleSheet.create({
     height: 40,
     borderColor: '#ccc',
     borderWidth: 1,
-    paddingHorizontal: 10,
+    paddingHorizontal:10,
     borderRadius: 5,
   },
   filterButton: {
     backgroundColor: '#007AFF',
-    paddingVertical: 10,
-    paddingHorizontal: 20,
+    paddingVertical: 5,
+    paddingHorizontal: 10,
     borderRadius: 5,
     marginTop: 10,
     alignItems: 'center',
@@ -212,6 +210,7 @@ const styles = StyleSheet.create({
   filterButtonText: {
     color: '#fff',
     fontWeight: 'bold',
+    fontSize: 14,
   },
   mapContainer: {
     flex: 0.6,
@@ -233,7 +232,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     backgroundColor: '#f2f2f2',
     borderRadius: 5,
-    marginTop: 10,
   },
   earthquakeItem: {
     flexDirection: 'row',
